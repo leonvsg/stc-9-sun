@@ -3,6 +3,11 @@ Academy
 
 Учебный проект
 
+## Требования
+
+- Java 8
+- Postgres 9.6
+- Apache Tomcat 7
 
 ## Установка
 
