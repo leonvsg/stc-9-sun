@@ -14,7 +14,7 @@ Academy
  - `ACADEMY_APP_JDBC_USERNAME`
  - `ACADEMY_APP_JDBC_PASSWORD`
 
-Например, при использовании [Apache Tomcat](http://tomcat.apache.org/) на Linux или  OS X, можно прописать в файле `$CATALINA_HOME/bin/setenv.sh`:
+Например, при использовании [Apache Tomcat](http://tomcat.apache.org/) на Linux или  OS X, можно прописать в файле `${catalina.base}/bin/setenv.sh`:
 
 
 ```sh
