@@ -1,5 +1,6 @@
 package ru.innopolis.stc9.sun.academy.controllers;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 import ru.innopolis.stc9.sun.academy.connection.ConnectionManager;
@@ -15,30 +16,26 @@ import java.sql.SQLException;
 
 
 public class IndexController extends HttpServlet {
+    private static final Logger logger = Logger.getLogger(IndexController.class);
+
     @Autowired
     private ConnectionManager connectionManager;
 
-    public void init(ServletConfig config) {
-        try {
-            super.init(config);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        }
-        SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this,
-                config.getServletContext());
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         // TODO: убрать заглушку, реализовать логику
-        Connection connection = connectionManager.getConnection();
-        try {
+        try(Connection connection = connectionManager.getConnection()) {
             request.setAttribute("hello", connection.getCatalog());
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
-
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 }
