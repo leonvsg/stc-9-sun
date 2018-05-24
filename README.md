@@ -26,3 +26,8 @@ export ACADEMY_APP_JDBC_PASSWORD=123456
 
 
 В этом случае при запуске *Apache Tomcat* произойдет автоматическое создание необходимых переменных окружения.
+
+
+## Логирование
+
+Логи пишутся в *stdout* (`${catalina.base}/logs/catalina.out`) и в файл `${catalina.base}/logs/academy.log`.
