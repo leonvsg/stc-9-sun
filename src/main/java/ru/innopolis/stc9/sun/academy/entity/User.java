@@ -13,6 +13,12 @@ public class User {
 
     private Set<String> roles; // TODO: необходимо реализовать маппинг
 
+    private String email;
+
+    private String password;
+
+    private Boolean isActive = true;
+
     public User() {
 
     }
@@ -21,17 +27,22 @@ public class User {
         this.id = id;
     }
 
-    public User(Integer id, String firstName, String lastName, String patronymic) {
+    public User(Integer id, String firstName, String lastName, String patronymic, String email, String password,
+                Boolean isActive) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.patronymic = patronymic;
+        this.email = email;
+        this.password = password;
     }
 
-    public User(String firstName, String lastName, String patronymic) {
+    public User(String firstName, String lastName, String patronymic, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.patronymic = patronymic;
+        this.email = email;
+        this.password = password;
     }
 
     public Integer getId() {
@@ -68,5 +79,29 @@ public class User {
 
     public void setRoles(Set<String> roles) {
         this.roles = roles;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
     }
 }

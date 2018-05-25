@@ -17,18 +17,19 @@ import java.util.Set;
 @Component
 public class UserDAOSQLImpl implements UserDAO {
     private final ConnectionManager connectionManager;
-
+    private final UserFactory userFactory;
     private static final Logger LOGGER = Logger.getLogger(UserDAOSQLImpl.class);
 
-    static final String INSERT_USER_SQL = "INSERT INTO \"user\" (firstname, lastname, patronymic) VALUES (?, ?, ?) ";
-    static final String SELECT_USER_SQL = "SELECT id, firstname, lastname, patronymic FROM \"user\" WHERE id = ?";
+    static final String INSERT_USER_SQL = "INSERT INTO \"user\" (firstname, lastname, patronymic, email, password, is_active) VALUES (?, ?, ?, ?, ?, ?) ";
+    static final String SELECT_USER_SQL = "SELECT * FROM \"user\" WHERE id = ?";
     static final String SELECT_ALL_USERS_SQL = "SELECT id, firstname, lastname, patronymic FROM \"user\" ORDER BY id";
-    static final String UPDATE_USER_SQL = "UPDATE \"user\" SET firstname = ?, lastname = ?, patronymic = ? WHERE id = ?";
+    static final String UPDATE_USER_SQL = "UPDATE \"user\" SET firstname = ?, lastname = ?, patronymic = ?, email = ?, password = ?, is_active = ? WHERE id = ?";
     static final String DELETE_USER_SQL = "DELETE FROM \"user\" WHERE id = ?";
 
     @Autowired
-    public UserDAOSQLImpl(ConnectionManager connectionManager) {
+    public UserDAOSQLImpl(ConnectionManager connectionManager, UserFactory userFactory) {
         this.connectionManager = connectionManager;
+        this.userFactory = userFactory;
     }
 
     @Override
@@ -38,6 +39,9 @@ public class UserDAOSQLImpl implements UserDAO {
             statement.setString(1, user.getFirstName());
             statement.setString(2, user.getLastName());
             statement.setString(3, user.getPatronymic());
+            statement.setString(4, user.getEmail());
+            statement.setString(5, user.getPassword());
+            statement.setBoolean(6, user.getActive());
             statement.execute();
             connection.close();
         } catch (SQLException e) {
@@ -54,7 +58,7 @@ public class UserDAOSQLImpl implements UserDAO {
             statement.setInt(1, id);
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
-                    user = UserFactory.createUser(resultSet);
+                    user = userFactory.createUser(resultSet);
                 }
             }
             connection.close();
@@ -72,7 +76,7 @@ public class UserDAOSQLImpl implements UserDAO {
             try (PreparedStatement statement = connection.prepareStatement(SELECT_ALL_USERS_SQL)) {
                 try (ResultSet resultSet = statement.executeQuery()) {
                     while (resultSet.next()) {
-                        users.add(UserFactory.createUser(resultSet));
+                        users.add(userFactory.createUser(resultSet));
                     }
                 }
             }
@@ -91,7 +95,10 @@ public class UserDAOSQLImpl implements UserDAO {
             statement.setString(1, user.getFirstName());
             statement.setString(2, user.getLastName());
             statement.setString(3, user.getPatronymic());
-            statement.setInt(4, user.getId());
+            statement.setString(4, user.getEmail());
+            statement.setString(5, user.getPassword());
+            statement.setBoolean(6, user.getActive());
+            statement.setInt(7, user.getId());
             count = statement.executeUpdate();
             connection.close();
         } catch (SQLException e) {

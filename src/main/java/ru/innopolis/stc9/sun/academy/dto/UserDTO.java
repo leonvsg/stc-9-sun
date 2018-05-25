@@ -1,5 +1,6 @@
 package ru.innopolis.stc9.sun.academy.dto;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Objects;
@@ -18,6 +19,17 @@ public class UserDTO {
     @NotNull
     @Size(min=2, max=25)
     private String patronymic;
+
+    @Email
+    @NotNull
+    @Size(max=25)
+    private String email;
+
+    @NotNull
+    @Size(min=7, max=25)
+    private String password;
+
+    private Boolean isActive = true;
 
     public UserDTO() {
 
@@ -57,6 +69,30 @@ public class UserDTO {
 
     public String getFullName() {
         return String.format("%s %s %s", lastName, firstName, patronymic);
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
     }
 
     @Override

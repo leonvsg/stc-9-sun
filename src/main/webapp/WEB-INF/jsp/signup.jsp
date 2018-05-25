@@ -17,6 +17,16 @@
         <form:input path="patronymic"/>
         <form:errors path="patronymic" cssClass="error"/>
     </div>
+    <div>
+        <form:label path="email">E-mail *</form:label>
+        <form:input path="email"/>
+        <form:errors path="email" cssClass="error"/>
+    </div>
+    <div>
+        <form:label path="password">Пароль *</form:label>
+        <form:input path="password"/>
+        <form:errors path="password" cssClass="error"/>
+    </div>
     <input type="submit" value="Отправить"/>
 </form:form>
 <%@include file="footer.jsp" %>
