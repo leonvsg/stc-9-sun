@@ -1,14 +1,22 @@
 package ru.innopolis.stc9.sun.academy.dto;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
 public class UserDTO {
     private Integer id;
 
+    @NotNull
+    @Size(min=2, max=25)
     private String firstName;
 
+    @NotNull
+    @Size(min=2, max=25)
     private String lastName;
 
+    @NotNull
+    @Size(min=2, max=25)
     private String patronymic;
 
     public UserDTO() {

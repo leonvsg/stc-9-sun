@@ -3,16 +3,19 @@
 <%@include file="header.jsp" %>
 <form:form method="POST" action="" modelAttribute="user">
     <div>
-        <form:label path="lastName">Фамилия</form:label>
+        <form:label path="lastName">Фамилия *</form:label>
         <form:input path="lastName"/>
+        <form:errors path="lastName" cssClass="error"/>
     </div>
     <div>
-        <form:label path="firstName">Имя</form:label>
+        <form:label path="firstName">Имя *</form:label>
         <form:input path="firstName"/>
+        <form:errors path="firstName" cssClass="error"/>
     </div>
     <div>
-        <form:label path="patronymic">Отчество</form:label>
+        <form:label path="patronymic">Отчество *</form:label>
         <form:input path="patronymic"/>
+        <form:errors path="patronymic" cssClass="error"/>
     </div>
     <input type="submit" value="Отправить"/>
 </form:form>
