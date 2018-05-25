@@ -3,6 +3,6 @@
     <b>Меню</b>
     <ul>
         <li><a href="/">Главная</a></li>
-        <li><a href="/web/signup">Регистрация</a></li>
+        <li><a href="/signup">Регистрация</a></li>
     </ul>
 </div>
