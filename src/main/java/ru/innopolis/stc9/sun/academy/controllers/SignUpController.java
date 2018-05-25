@@ -31,9 +31,8 @@ public class SignUpController {
     }
 
     @RequestMapping(path = "/", method = RequestMethod.POST)
-    public RedirectView signUpSubmit(@ModelAttribute("user") UserDTO user) {
+    public RedirectView signUpSubmit(@ModelAttribute("user") final UserDTO user, ModelMap model) {
         userService.addUser(user);
-        LOGGER.error(user.getFirstName());
         return new RedirectView("/");
     }
 }

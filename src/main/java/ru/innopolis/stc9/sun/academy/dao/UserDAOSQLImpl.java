@@ -38,6 +38,7 @@ public class UserDAOSQLImpl implements UserDAO {
             statement.setString(1, user.getFirstName());
             statement.setString(2, user.getLastName());
             statement.setString(3, user.getPatronymic());
+            statement.execute();
             connection.close();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
