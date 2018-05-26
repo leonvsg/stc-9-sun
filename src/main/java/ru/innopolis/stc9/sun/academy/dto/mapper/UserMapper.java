@@ -1,10 +1,8 @@
-package ru.innopolis.stc9.sun.academy.mapper;
+package ru.innopolis.stc9.sun.academy.dto.mapper;
 
-import org.springframework.stereotype.Component;
 import ru.innopolis.stc9.sun.academy.dto.UserDTO;
 import ru.innopolis.stc9.sun.academy.entity.User;
 
-@Component
 public class UserMapper {
     UserMapper() {
     }

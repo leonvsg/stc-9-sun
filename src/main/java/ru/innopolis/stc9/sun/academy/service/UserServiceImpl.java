@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.innopolis.stc9.sun.academy.dao.UserDAO;
 import ru.innopolis.stc9.sun.academy.dto.UserDTO;
-import ru.innopolis.stc9.sun.academy.mapper.UserMapper;
+import ru.innopolis.stc9.sun.academy.dto.mapper.UserMapper;
 
 import java.util.Set;
 import java.util.stream.Collectors;

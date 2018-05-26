@@ -22,7 +22,7 @@ public class UserDTO {
 
     @Email
     @NotNull
-    @Size(max=25)
+    @Size(min=5, max=25)
     private String email;
 
     @NotNull
@@ -105,7 +105,6 @@ public class UserDTO {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(id);
     }
 }

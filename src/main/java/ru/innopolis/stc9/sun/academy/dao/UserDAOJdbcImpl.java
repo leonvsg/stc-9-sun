@@ -4,7 +4,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.innopolis.stc9.sun.academy.connection.ConnectionManager;
-import ru.innopolis.stc9.sun.academy.dao.factory.UserFactory;
+import ru.innopolis.stc9.sun.academy.dao.mapper.UserJdbcMapper;
 import ru.innopolis.stc9.sun.academy.entity.User;
 
 import java.sql.Connection;
@@ -15,10 +15,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Component
-public class UserDAOSQLImpl implements UserDAO {
+public class UserDAOJdbcImpl implements UserDAO {
     private final ConnectionManager connectionManager;
-    private final UserFactory userFactory;
-    private static final Logger LOGGER = Logger.getLogger(UserDAOSQLImpl.class);
+    private static final Logger LOGGER = Logger.getLogger(UserDAOJdbcImpl.class);
 
     static final String INSERT_USER_SQL = "INSERT INTO \"user\" (firstname, lastname, patronymic, email, password, is_active) VALUES (?, ?, ?, ?, ?, ?) ";
     static final String SELECT_USER_SQL = "SELECT * FROM \"user\" WHERE id = ?";
@@ -27,21 +26,15 @@ public class UserDAOSQLImpl implements UserDAO {
     static final String DELETE_USER_SQL = "DELETE FROM \"user\" WHERE id = ?";
 
     @Autowired
-    public UserDAOSQLImpl(ConnectionManager connectionManager, UserFactory userFactory) {
+    public UserDAOJdbcImpl(ConnectionManager connectionManager) {
         this.connectionManager = connectionManager;
-        this.userFactory = userFactory;
     }
 
     @Override
     public boolean add(User user) {
         Connection connection = connectionManager.getConnection();
         try (PreparedStatement statement = connection.prepareStatement(INSERT_USER_SQL)) {
-            statement.setString(1, user.getFirstName());
-            statement.setString(2, user.getLastName());
-            statement.setString(3, user.getPatronymic());
-            statement.setString(4, user.getEmail());
-            statement.setString(5, user.getPassword());
-            statement.setBoolean(6, user.getActive());
+            UserJdbcMapper.toStatement(statement, user);
             statement.execute();
             connection.close();
         } catch (SQLException e) {
@@ -58,7 +51,7 @@ public class UserDAOSQLImpl implements UserDAO {
             statement.setInt(1, id);
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
-                    user = userFactory.createUser(resultSet);
+                    user = UserJdbcMapper.toUser(resultSet);
                 }
             }
             connection.close();
@@ -76,7 +69,7 @@ public class UserDAOSQLImpl implements UserDAO {
             try (PreparedStatement statement = connection.prepareStatement(SELECT_ALL_USERS_SQL)) {
                 try (ResultSet resultSet = statement.executeQuery()) {
                     while (resultSet.next()) {
-                        users.add(userFactory.createUser(resultSet));
+                        users.add(UserJdbcMapper.toUser(resultSet));
                     }
                 }
             }
@@ -92,12 +85,7 @@ public class UserDAOSQLImpl implements UserDAO {
         Connection connection = connectionManager.getConnection();
         int count = 0;
         try (PreparedStatement statement = connection.prepareStatement(UPDATE_USER_SQL)) {
-            statement.setString(1, user.getFirstName());
-            statement.setString(2, user.getLastName());
-            statement.setString(3, user.getPatronymic());
-            statement.setString(4, user.getEmail());
-            statement.setString(5, user.getPassword());
-            statement.setBoolean(6, user.getActive());
+            UserJdbcMapper.toStatement(statement, user);
             statement.setInt(7, user.getId());
             count = statement.executeUpdate();
             connection.close();
