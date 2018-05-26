@@ -1,6 +1,8 @@
 Academy
 =======
 
+[![Build Status](https://travis-ci.org/aliskhakov/stc-9-sun.svg)](https://travis-ci.org/aliskhakov/stc-9-sun)
+
 Учебный проект
 
 ## Требования
