@@ -17,7 +17,7 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/signup")
 public class SignUpController {
-    public static final String TITLE = "Регистрация";
+    private static final String TITLE = "Регистрация";
     private final UserService userService;
 
     private static final Logger LOGGER = Logger.getLogger(SignUpController.class);
