@@ -1,9 +1,22 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
-<head>
-    <title>${title}</title>
-    <link rel="stylesheet" href="/static/css/style.css"/>
-</head>
+<%@ include file="head.jsp"%>
 <body>
-<%@include file="menu.jsp"%>
-<h1>${title}</h1>
+<div class="wrapper">
+    <header class="header">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">Academy</a>
+                    <p class="navbar-text navbar-right">Signed in as ${name} ${surname} (${email})</p>
+                    <a class="btn btn-default navbar-btn btn-logout btn-head" href="#">My page</a>
+                    <a class="btn btn-default navbar-btn btn-my-page btn-head" href="#">Logout</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="middle">
+        <%@ include file="menu.jsp"%>
+        <div class="container">
+            <main class="content">
