@@ -1,0 +1,56 @@
+.wrapper {
+    width: 100%;
+    min-width: 900px;
+    min-height: 100%;
+}
+
+
+/* Header
+-----------------------------------------------------------------------------*/
+.navbar {
+    margin-bottom: 0;
+}
+
+.btn-head {
+    position: absolute;
+    top: 0;
+}
+
+.btn-logout {
+    right: 100px;
+}
+
+.btn-my-page {
+    right: 20px;
+}
+
+/* Middle
+-----------------------------------------------------------------------------*/
+.middle {
+    width: 100%;
+    position: relative;
+}
+
+.container {
+    overflow: hidden;
+    padding: 15px 15px 15px 10px;
+    margin: 0;
+    width: auto;
+    min-width: 600px;
+}
+
+.content {
+    min-height: 500px;
+}
+
+/* Left Sidebar
+-----------------------------------------------------------------------------*/
+.left-sidebar {
+    width: 200px;
+    float: left;
+    padding: 15px 10px 15px 15px;
+}
+
+
+/* Footer
+-----------------------------------------------------------------------------*/
