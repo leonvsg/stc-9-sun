@@ -18,7 +18,6 @@ import javax.validation.Valid;
 public class UsersController {
     private static final Logger LOGGER = Logger.getLogger(UsersController.class);
     private static final String TITLE = "Пользователи";
-    protected static final String REDIRECT_TO_USERS = "redirect:/users";
     private final UserService userService;
 
     @Autowired
@@ -33,20 +32,16 @@ public class UsersController {
         return "users";
     }
 
-    @PostMapping
-    public String postUser(@Valid @ModelAttribute("user") final UserDTO user,
+    @PostMapping("/add")
+    public String addUser(@Valid @ModelAttribute("user") final UserDTO user,
                            BindingResult bindingResult,
                            ModelMap model){
-        return REDIRECT_TO_USERS;
-    }
-
-    @PostMapping("/add")
-    public String addUser(ModelMap model){
-        return REDIRECT_TO_USERS;
-    }
-
-    @PostMapping("/update")
-    public String updateUser(ModelMap model){
-        return REDIRECT_TO_USERS;
+        if (!bindingResult.hasErrors()) {
+            userService.addUser(user);
+            return "redirect:/users";
+        } else {
+            model.addAttribute("title", TITLE);
+            return "users";
+        }
     }
 }
