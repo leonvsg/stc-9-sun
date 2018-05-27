@@ -15,7 +15,11 @@
         <c:forEach items="${users}" var="user">
             <tr>
                 <td>${user.id}</td>
-                <td>${user.fullName}</td>
+                <td>
+                    <a href="/users/${user.id}/">
+                    ${user.fullName}
+                    </a>
+                </td>
                 <td>${user.email}</td>
                 <td>${user.active}</td>
             </tr>
