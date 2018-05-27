@@ -19,11 +19,11 @@ public class UserDAOJdbcImpl implements UserDAO {
     private final ConnectionManager connectionManager;
     private static final Logger LOGGER = Logger.getLogger(UserDAOJdbcImpl.class);
 
-    static final String INSERT_USER_SQL = "INSERT INTO \"user\" (firstname, lastname, patronymic, email, password, is_active) VALUES (?, ?, ?, ?, ?, ?) ";
-    static final String SELECT_USER_SQL = "SELECT * FROM \"user\" WHERE id = ?";
-    static final String SELECT_ALL_USERS_SQL = "SELECT id, firstname, lastname, patronymic FROM \"user\" ORDER BY id";
-    static final String UPDATE_USER_SQL = "UPDATE \"user\" SET firstname = ?, lastname = ?, patronymic = ?, email = ?, password = ?, is_active = ? WHERE id = ?";
-    static final String DELETE_USER_SQL = "DELETE FROM \"user\" WHERE id = ?";
+    private static final String INSERT_USER_SQL = "INSERT INTO \"user\" (firstname, lastname, patronymic, email, password, is_active) VALUES (?, ?, ?, ?, ?, ?) ";
+    private static final String SELECT_USER_SQL = "SELECT * FROM \"user\" WHERE id = ?";
+    private static final String SELECT_ALL_USERS_SQL = "SELECT * FROM \"user\" ORDER BY id";
+    private static final String UPDATE_USER_SQL = "UPDATE \"user\" SET firstname = ?, lastname = ?, patronymic = ?, email = ?, password = ?, is_active = ? WHERE id = ?";
+    private static final String DELETE_USER_SQL = "DELETE FROM \"user\" WHERE id = ?";
 
     @Autowired
     public UserDAOJdbcImpl(ConnectionManager connectionManager) {
