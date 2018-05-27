@@ -22,15 +22,6 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>web</servlet-name>
-        <url-pattern>/web/*</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>index</servlet-name>
-        <servlet-class>ru.innopolis.stc9.sun.academy.controllers.IndexController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>index</servlet-name>
-        <url-pattern></url-pattern>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 </web-app>
