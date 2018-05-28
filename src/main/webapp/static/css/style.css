@@ -4,6 +4,13 @@
     min-height: 100%;
 }
 
+.custom-alert{
+    display: inline-block;
+    margin-bottom: 0px;
+    margin-top: 10px;
+    text-align: center;
+    padding: 5px;
+}
 
 /* Header
 -----------------------------------------------------------------------------*/
@@ -41,6 +48,14 @@
 
 .content {
     min-height: 500px;
+}
+
+.form-group {
+    margin: 0;
+}
+
+.table>tbody>.custom-tr>td {
+    padding: 5px;
 }
 
 /* Left Sidebar
