@@ -31,6 +31,7 @@ public class UsersController {
     public String getUsers(ModelMap model){
         model.addAttribute(TITLE_ATTRIBUTE_NAME, TITLE);
         model.addAttribute(USERS_ATTRIBUTE_NAME, userService.getUsers());
+        model.addAttribute("user", new UserDTO());
         return USERS_VIEW_NAME;
     }
 
@@ -43,6 +44,7 @@ public class UsersController {
             return "redirect:/users";
         } else {
             model.addAttribute(TITLE_ATTRIBUTE_NAME, TITLE);
+            model.addAttribute(USERS_ATTRIBUTE_NAME, userService.getUsers());
             return USERS_VIEW_NAME;
         }
     }
