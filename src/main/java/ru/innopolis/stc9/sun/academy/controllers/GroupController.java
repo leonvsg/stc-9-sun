@@ -59,6 +59,7 @@ public class GroupController {
                         ModelMap model) {
         if (!bindingResult.hasErrors()) {
             groupService.addGroup(group);
+            return "redirect:/groups";
         }
         return "group";
     }
