@@ -24,6 +24,13 @@ public class GroupDTO {
 
     private boolean is_active = true;
 
+    public GroupDTO() {
+    }
+
+    public GroupDTO(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }

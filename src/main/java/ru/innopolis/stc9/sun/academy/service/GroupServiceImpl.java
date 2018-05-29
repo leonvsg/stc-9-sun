@@ -29,9 +29,15 @@ public class GroupServiceImpl implements GroupService {
     public boolean updateGroup(GroupDTO groupDTO) { return groupDAO.update(GroupMapper.toEntity(groupDTO)); }
 
     @Override
+    public boolean addOrUpdateGroup(GroupDTO groupDTO) { return groupDAO.addOrUpdate(GroupMapper.toEntity(groupDTO)); }
+
+    @Override
     public boolean deleteGroupById(int id) {
         return groupDAO.deleteById(id);
     }
+
+    @Override
+    public GroupDTO getGroupById(int id) { return GroupMapper.toDto(groupDAO.getById(id)); }
 
     @Override
     public Set<GroupDTO> getAllGroups() {
