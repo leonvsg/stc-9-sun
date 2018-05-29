@@ -7,7 +7,6 @@ import java.util.Set;
 public interface GroupDAO {
     boolean add(Group group);
     boolean update(Group group);
-    boolean addOrUpdate(Group group);
     boolean deleteById(int id);
     Group getById(int id);
     Set<Group> getAll();

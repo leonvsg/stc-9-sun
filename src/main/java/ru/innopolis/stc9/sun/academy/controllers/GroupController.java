@@ -10,11 +10,7 @@ import ru.innopolis.stc9.sun.academy.dto.GroupDTO;
 import ru.innopolis.stc9.sun.academy.service.GroupService;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Controller
 public class GroupController {

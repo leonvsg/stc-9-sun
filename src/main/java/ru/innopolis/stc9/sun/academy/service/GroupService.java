@@ -7,7 +7,6 @@ import java.util.Set;
 public interface GroupService {
     boolean addGroup(GroupDTO groupDTO);
     boolean updateGroup(GroupDTO groupDTO);
-    boolean addOrUpdateGroup(GroupDTO groupDTO);
     boolean deleteGroupById(int id);
     GroupDTO getGroupById(int id);
     Set<GroupDTO> getAllGroups();

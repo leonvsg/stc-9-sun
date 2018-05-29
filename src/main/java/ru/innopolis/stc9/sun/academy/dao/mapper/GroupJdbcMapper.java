@@ -1,7 +1,6 @@
 package ru.innopolis.stc9.sun.academy.dao.mapper;
 
 import ru.innopolis.stc9.sun.academy.entity.Group;
-import ru.innopolis.stc9.sun.academy.entity.User;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

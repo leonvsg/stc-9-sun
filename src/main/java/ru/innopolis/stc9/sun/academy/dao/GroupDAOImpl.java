@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.innopolis.stc9.sun.academy.connection.ConnectionManager;
 import ru.innopolis.stc9.sun.academy.dao.mapper.GroupJdbcMapper;
-import ru.innopolis.stc9.sun.academy.dao.mapper.UserJdbcMapper;
 import ru.innopolis.stc9.sun.academy.entity.Group;
 
 import java.sql.Connection;
@@ -22,7 +21,8 @@ public class GroupDAOImpl implements GroupDAO {
     static final String UPDATE_GROUP_SQL = "UPDATE groups SET title = ?, description = ?, start_date = to_date(?,'YYYY-MM-DD'), finished_date = to_date(?,'YYYY-MM-DD'), is_active = ? WHERE id = ?";
     static final String DELETE_GROUP_SQL = "DELETE FROM groups WHERE id = ?";
     static final String SELECT_ALL_GROUPS_SQL = "SELECT id, title, description, start_date, finished_date, is_active FROM groups ORDER BY id";
-    static final String GET_GROUP__SQL = "SELECT id, title, description, start_date, finished_date, is_active FROM groups WHERE id = ?";
+    static final String GET_GROUP_SQL = "SELECT id, title, description, start_date, finished_date, is_active FROM groups WHERE id = ?";
+
 
     private final ConnectionManager connectionManager;
     private static final Logger LOGGER = Logger.getLogger(UserDAOJdbcImpl.class);
@@ -60,12 +60,6 @@ public class GroupDAOImpl implements GroupDAO {
     }
 
     @Override
-    public boolean addOrUpdate(Group group) {
-        if(group.getId() == 0) return add(group);
-        return update(group);
-    }
-
-    @Override
     public boolean deleteById(int id) {
         Connection connection = connectionManager.getConnection();
         try (PreparedStatement statement = connection.prepareStatement(DELETE_GROUP_SQL)) {
@@ -83,7 +77,8 @@ public class GroupDAOImpl implements GroupDAO {
         Group group = null;
         Connection connection = connectionManager.getConnection();
         try {
-            try (PreparedStatement statement = connection.prepareStatement(SELECT_ALL_GROUPS_SQL)) {
+            try (PreparedStatement statement = connection.prepareStatement(GET_GROUP_SQL)) {
+                statement.setInt(1, id);
                 try (ResultSet resultSet = statement.executeQuery()) {
                     while (resultSet.next()) {
                         group = GroupJdbcMapper.toGroup(resultSet);
