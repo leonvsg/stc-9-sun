@@ -3,42 +3,122 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="header.jsp" %>
 
-<h1>${group.title}</h1>
-<div>
-    <c:if test="${group.id == 0}">
-        <h3>Создание новой группы</h3>
-    </c:if>
-    <form:form method="POST" action="" modelAttribute="group">
-        <form:input path="id" type="hidden" value="${group.id}"/>
-        <form:input path="is_active" type="hidden" value="${group.is_active}"/>
-        <div>
-            <form:label path="title">Название:</form:label>
-            <form:input path="title" value="${group.title}"/>
-            <form:errors path="title" cssClass="error"/>
-        </div>
-        <div>
-            <form:label path="description">Описание:</form:label>
-            <form:input path="description" value="${group.description}"/>
-            <form:errors path="description" cssClass="error"/>
-        </div>
-        <div>
-            <form:label path="start_date">Дата начала:</form:label>
-            <form:input path="start_date" value="${group.start_date}"/>
-            <form:errors path="start_date" cssClass="error"/>
-        </div>
-        <div>
-            <form:label path="finished_date">Дата завершения:</form:label>
-            <form:input path="finished_date" value="${group.finished_date}"/>
-            <form:errors path="finished_date" cssClass="error"/>
-        </div>
-        <c:if test="${group.id == 0}">
-            <input type="submit" value="Создать"/>
-        </c:if>
-        <c:if test="${group.id != 0}">
-            <input type="submit" value="Обновить"/>
-            <a href="/group/del/${group.id}">Удалить</a>
-        </c:if>
-    </form:form>
-    <a href="/groups">К списку групп</a>
+<div class="panel panel-default">
+    <!-- Содержание панели по умолчанию -->
+    <div class="panel-heading">${group.title}</div>
+    <!-- Таблица -->
+    <table class="table">
+        <form:form method="post" action="" modelAttribute="group" cssClass="form-inline">
+            <form:input path="id" hidden="true"/>
+            <c:if test="${group.id != 0}">
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <a role="button" data-toggle="collapse" href="/group/del/${group.id}" aria-expanded="false">
+                            Удалить
+                        </a>
+                    </td>
+                </tr>
+            </c:if>
+            <tr>
+                <td>Название</td>
+                <td>${group.title}</td>
+                <td>
+                    <c:if test="${group.id != 0}">
+                        <a role="button" data-toggle="collapse" href="#changeTitle" aria-expanded="false" aria-controls="changeTitle">
+                            Изменить
+                        </a>
+                    </c:if>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" class="custom-td">
+                    <div <c:if test="${group.id != 0}"> class="collapse" id="changeTitle" </c:if>>
+                        <div class="well">
+                            <div class="form-group">
+                                <form:input path="title" placeholder="Введите название" cssClass="form-control"/>
+                                <form:errors path="title" cssClass="alert alert-danger custom-alert" role="alert"/>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Описание</td>
+                <td>${group.description}</td>
+                <td>
+                    <c:if test="${group.id != 0}">
+                        <a role="button" data-toggle="collapse" href="#changeDescription" aria-expanded="false" aria-controls="changeDescription">
+                            Изменить
+                        </a>
+                    </c:if>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" class="custom-td">
+                    <div <c:if test="${group.id != 0}"> class="collapse" id="changeDescription" </c:if>>
+                        <div class="well">
+                            <div class="form-group">
+                                <form:input path="description" placeholder="Введите описание" cssClass="form-control"/>
+                                <form:errors path="description" cssClass="alert alert-danger custom-alert" role="alert"/>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Дата начала</td>
+                <td>${group.start_date}</td>
+                <td>
+                    <c:if test="${group.id != 0}">
+                        <a role="button" data-toggle="collapse" href="#changeStart" aria-expanded="false" aria-controls="changeStart">
+                            Изменить
+                        </a>
+                    </c:if>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" class="custom-td">
+                    <div <c:if test="${group.id != 0}"> class="collapse" id="changeStart" </c:if>>
+                        <div class="well">
+                            <div class="form-group">
+                                <form:input path="start_date" placeholder="Введите дату начала" cssClass="form-control"/>
+                                <form:errors path="start_date" cssClass="alert alert-danger custom-alert" role="alert"/>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Дата завершения</td>
+                <td>${group.finished_date}</td>
+                <td>
+                    <c:if test="${group.id != 0}">
+                        <a role="button" data-toggle="collapse" href="#changeFinish" aria-expanded="false" aria-controls="changeFinish">
+                            Изменить
+                        </a>
+                    </c:if>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" class="custom-td">
+                    <div <c:if test="${group.id != 0}"> class="collapse" id="changeFinish" </c:if>>
+                        <div class="well">
+                            <div class="form-group">
+                                <form:input path="finished_date" placeholder="Введите дату завершения" cssClass="form-control"/>
+                                <form:errors path="finished_date" cssClass="alert alert-danger custom-alert" role="alert"/>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <button type="submit" class="btn btn-success">Соханить</button>
+                </td>
+            </tr>
+        </form:form>
+    </table>
 </div>
 <%@include file="footer.jsp" %>
