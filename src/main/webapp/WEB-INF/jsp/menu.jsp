@@ -7,6 +7,7 @@
                 <li><a href="/">Главная</a></li>
                 <li><a href="/signup">Регистрация</a></li>
                 <li><a href="/users">Пользователи</a></li>
+                <li><a href="/groups">Группы</a></li>
             </ul>
         </div>
     </div>
