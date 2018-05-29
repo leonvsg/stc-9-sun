@@ -6,6 +6,7 @@
             <ul class="nav nav-pills nav-stacked">
                 <li><a href="/">Главная</a></li>
                 <li><a href="/signup">Регистрация</a></li>
+                <li><a href="/users">Пользователи</a></li>
             </ul>
         </div>
     </div>

@@ -21,7 +21,7 @@ public class UserDAOJdbcImpl implements UserDAO {
 
     static final String INSERT_USER_SQL = "INSERT INTO \"user\" (firstname, lastname, patronymic, email, password, is_active) VALUES (?, ?, ?, ?, ?, ?) ";
     static final String SELECT_USER_SQL = "SELECT * FROM \"user\" WHERE id = ?";
-    static final String SELECT_ALL_USERS_SQL = "SELECT id, firstname, lastname, patronymic FROM \"user\" ORDER BY id";
+    static final String SELECT_ALL_USERS_SQL = "SELECT * FROM \"user\" ORDER BY id";
     static final String UPDATE_USER_SQL = "UPDATE \"user\" SET firstname = ?, lastname = ?, patronymic = ?, email = ?, password = ?, is_active = ? WHERE id = ?";
     static final String DELETE_USER_SQL = "DELETE FROM \"user\" WHERE id = ?";
 
