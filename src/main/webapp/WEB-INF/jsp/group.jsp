@@ -15,7 +15,7 @@
                     <td></td>
                     <td></td>
                     <td>
-                        <a role="button" data-toggle="collapse" href="/group/del/${group.id}" aria-expanded="false">
+                        <a role="button" href="/group/del/${group.id}">
                             Удалить
                         </a>
                     </td>
