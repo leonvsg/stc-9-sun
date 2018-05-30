@@ -7,9 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/")
 public class IndexController {
     private static final Logger LOGGER = Logger.getLogger(SignUpController.class);
+
+    @RequestMapping("/")
+
+
     @GetMapping
     protected String index(ModelMap model) {
         model.addAttribute("title", "Главная");

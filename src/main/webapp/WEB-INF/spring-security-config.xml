@@ -15,7 +15,7 @@
     </http>
 
     <authentication-manager>
-        <authentication-provider ref='CustomAuthenticationProvider'/>
+        <authentication-provider ref='customAuthenticationProvider'/>
     </authentication-manager>
 
 </beans:beans>
