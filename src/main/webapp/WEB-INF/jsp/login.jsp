@@ -7,18 +7,27 @@
     Причина: <c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}"/>
   </span>
 </c:if>
-<form:form method="POST" action="" modelAttribute="user">
-    <div>
-        <form:label path="email">E-mail *</form:label>
-        <form:input path="email"/>
-        <form:errors path="email" cssClass="error"/>
-    </div>
-    <div>
-        <form:label path="password">Пароль *</form:label>
-        <form:input path="password"/>
-        <form:errors path="password" cssClass="error"/>
-    </div>
-    <input type="submit" value="Отправить"/>
-    <input type="hidden" name="<c:out value="${_csrf.parameterName}"/>" value="<c:out value="${_csrf.token}"/>"/>
-</form:form>
+<div>
+    <form name= "form" action= "security_check" method= "post" class= "">
+        <security:authorize access= "hasAnyRole('ADMIN','USER', 'TEACHER')" var= "isUSer"/>
+        <c:if test= "${not isUSer}">
+            <c:if test= "${empty param.error}">
+                Вы не вошши в систему
+            </c:if>
+            <c:if test= "${not empty param.error}">
+                <br>Неправильный логин или пароль
+            </c:if>
+        </c:if>
+        <c:if test= "${isUSer}">
+            Вы вошли как: <security:authentication property= "principal.username"/> с ролью: <security:authentication property= "principal.authorities"/>
+        </c:if>
+
+        <label for= "inputEmail" class= ""></label>
+        <input id= "inputEmail" class= "" name= "username" required autofocus/>
+
+        <label for= "inputPassword" class= ""></label>
+        <input type= "password" id= "inputPassword" class= "" name= "password" required/>
+        <input type= "submit" value= "Войти">
+    </form>
+</div>
 <%@include file="footer.jsp" %>
