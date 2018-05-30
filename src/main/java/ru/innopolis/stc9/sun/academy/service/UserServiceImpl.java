@@ -37,4 +37,7 @@ public class UserServiceImpl implements UserService {
     public boolean updateUser(UserDTO userDTO) {
         return userDAO.update(UserMapper.toEntity(userDTO));
     }
+
+    @Override
+    public UserDTO getUserByEmail(String email) {return UserMapper.toDto(userDAO.getByEmail(email));}
 }

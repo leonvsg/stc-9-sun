@@ -1,34 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<b:beans xmlns="http://www.springframework.org/schema/security"
-         xmlns:b="http://www.springframework.org/schema/beans"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/security
-	http://www.springframework.org/schema/security/spring-security.xsd
-	http://www.springframework.org/schema/beans
-	http://www.springframework.org/schema/beans/spring-beans.xsd">
+	http://www.springframework.org/schema/security/spring-security.xsd">
 
-    <http realm="academy" use-expressions="false">
-        <intercept-url pattern="/" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-        <intercept-url pattern="/login*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-        <intercept-url pattern="/signup*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-        <intercept-url pattern="/group*" access="ROLE_ADMIN"/>
-        <intercept-url pattern="/**" access="ROLE_USER"/>
-
-        <form-login login-page="/login.jsp"
-                    authentication-failure-url="/login.jsp?auth_error=1"/>
-        <logout logout-success-url="/index.jsp"/>
-        <csrf/>
+    <http auto-config='true'>
+        <intercept-url pattern="/*" access="hasRole('ROLE_USER')" />
+        <form-login login-page="/login" authentication-failure-url="/login.jsp?error=1"
+                    username-parameter="username" password-parameter="password" />
+        <csrf />
+        <logout logout-success-url="/logout" />
     </http>
 
     <authentication-manager>
-        <authentication-provider>
-            <user-service>
-                <user name="admin" password="admin" authorities="ROLE_USER, ROLE_ADMIN" />
-                <user name="student" password="student" authorities="ROLE_USER" />
-                <user name="guest" password="guest" authorities="ROLE_GUEST" />
-            </user-service>
-        </authentication-provider>
+        <authentication-provider ref='CustomAuthenticationProvider'/>
     </authentication-manager>
 
-</b:beans>
+</beans:beans>

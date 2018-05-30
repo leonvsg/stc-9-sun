@@ -1,5 +1,6 @@
 package ru.innopolis.stc9.sun.academy.entity;
 
+import java.util.List;
 import java.util.Set;
 
 public class User {
@@ -11,7 +12,7 @@ public class User {
 
     private String patronymic;
 
-    private Set<String> roles; // TODO: необходимо реализовать маппинг
+    private List<Role> roles;
 
     private String email;
 
@@ -73,11 +74,11 @@ public class User {
         this.patronymic = patronymic;
     }
 
-    public Set<String> getRoles() {
+    public List<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<String> roles) {
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 
