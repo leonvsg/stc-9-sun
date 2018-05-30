@@ -24,6 +24,7 @@ public class UserDAOJdbcImpl implements UserDAO {
     static final String SELECT_ALL_USERS_SQL = "SELECT id, firstname, lastname, patronymic FROM \"user\" ORDER BY id";
     static final String UPDATE_USER_SQL = "UPDATE \"user\" SET firstname = ?, lastname = ?, patronymic = ?, email = ?, password = ?, is_active = ? WHERE id = ?";
     static final String DELETE_USER_SQL = "DELETE FROM \"user\" WHERE id = ?";
+    static final String SELECT_USER_SQL_EMAIL = "SELECT * FROM \"user\" WHERE email = ?";
 
     @Autowired
     public UserDAOJdbcImpl(ConnectionManager connectionManager) {
@@ -107,5 +108,23 @@ public class UserDAOJdbcImpl implements UserDAO {
             LOGGER.error(e.getMessage());
         }
         return count > 0;
+    }
+
+    @Override
+    public User getByEmail(String email) {
+        Connection connection = connectionManager.getConnection();
+        User user = null;
+        try (PreparedStatement statement = connection.prepareStatement(SELECT_USER_SQL_EMAIL)) {
+            statement.setString(1, email);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    user = UserJdbcMapper.toUser(resultSet);
+                }
+            }
+            connection.close();
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
+        }
+        return user;
     }
 }
