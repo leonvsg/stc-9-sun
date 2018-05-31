@@ -10,8 +10,18 @@ repositories {
     mavenCentral()
 }
 
-task stage(dependsOn: ['build', 'clean'])
-build.mustRunAfter clean
+task stage() {
+    dependsOn clean, war
+}
+war.mustRunAfter clean
+
+task copyToLib(type: Copy) {
+    into "$buildDir/server"
+    from(configurations.compile) {
+        include "webapp-runner*"
+    }
+}
+stage.dependsOn(copyToLib)
 
 dependencies {
     compile group: 'javax.servlet', name: 'jstl', version: '1.2'
@@ -24,4 +34,5 @@ dependencies {
     compile group: 'org.hibernate.validator', name: 'hibernate-validator', version: '6.0.9.Final'
     compile group: 'org.apache.taglibs', name: 'taglibs-standard-spec', version: '1.2.5'
     compile group: 'org.apache.taglibs', name: 'taglibs-standard-impl', version: '1.2.5'
+    compile group: 'com.github.jsimone', name: 'webapp-runner', version: '8.5.11.3'
 }
